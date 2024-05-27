@@ -13,9 +13,33 @@ function generateTaskId() {
 }
 
 // Todo: create a function to create a task card
-function createTaskCard(task) {
+function createTaskCard(title, date, task) {
+    const cardColumnEl = $('<div>');
+    cardColumnEl.addClass('col-12 col-sm-4 col-md-3 mb-3');
+
+    const cardEl = $('<div>');
+    cardEl.addClass('card h-100');
+    cardEl.appendTo(cardColumnEl);
+
+    const cardTitle = $('<h5>').addClass('card-title').text(title);
+    cardTitle.appendTo(cardEl);
+
+    const cardBodyEl = $('<div>');
+    cardBodyEl.addClass('card-body');
+    cardBodyEl.appendTo(cardEl);
+
+    const cardDueDate = $('<p>').addClass('card-date').text(date);
+    cardDueDate.appendTo(cardBodyEl);  
     
-    
+    const cardTask = $('<p>').addClass('card-task').text(task);
+    cardTask.appendTo(cardBodyEl);
+
+    const deleteBtnEl = $('<button>');
+    deleteBtnEl.addClass('btn btn-danger btn-sm').text('Remove Task');
+    deleteBtnEl.on('click', handleDeleteTask);
+    deleteBtnEl.appendTo(cardEl);
+
+    return cardColumnEl;
 }
 
 // Todo: create a function to render the task list and make cards draggable
@@ -40,6 +64,7 @@ function handleAddTask(event){
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+    event.preventDefault();
 
 }
 
