@@ -2,6 +2,11 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+let taskTitleEl = $('#task-title');
+let taskDateEl = $('#task-due-date');
+let taskTextEl = $('#task-text');
+
+
 // Using Date.now() to generate a unique ID.
 function generateTaskId() {
  return (Date.now())
@@ -9,6 +14,7 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+    
     
 }
 
@@ -19,6 +25,16 @@ function renderTaskList() {
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
+    event.preventDefault();
+    const taskTitle = taskTitleEl.val();
+    const taskDate = taskDateEl.val();
+    const taskText = taskTextEl.val();
+
+    if (!taskTitle || !taskDate || !taskText) {
+        console.log('You need to fill out the task details!');
+        return;
+    }
+
 
 }
 
