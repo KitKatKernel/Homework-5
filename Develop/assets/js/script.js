@@ -6,6 +6,10 @@ let taskTitleEl = $('#task-title');
 let taskDateEl = $('#task-due-date');
 let taskTextEl = $('#task-text');
 
+function displayTime() {
+    const rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
+    timeDisplayEl.text(rightNow);
+}
 
 // Using Date.now() to generate a unique ID.
 function generateTaskId() {
@@ -19,6 +23,7 @@ function createTaskCard(title, date, task) {
 
     const cardEl = $('<div>');
     cardEl.addClass('card h-100');
+    cardEl.attr('task-id', task.id)
     cardEl.appendTo(cardColumnEl);
 
     const cardTitle = $('<h5>').addClass('card-title').text(title);
@@ -57,14 +62,32 @@ function handleAddTask(event){
     if (!taskTitle || !taskDate || !taskText) {
         console.log('You need to fill out the task details!');
         return;
-    }
+    } 
+
+    const taskId = generateTaskId();
+
+    const task = {
+        id: taskId,
+        title: taskTitle,
+        dueDate: taskDate, 
+        description: taskText
+    };
+
+    const taskCard = createTaskCard(task);
+
+    $('#todo-cards').append(taskCard);
+    
+    taskList.push(task);
 
 
+    taskTitleEl.val('');
+    taskDateEl.val('');
+    taskTextEl.val('');
 }
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
-    event.preventDefault();
+
 
 }
 
