@@ -1,6 +1,13 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
+if (!taskList) {
+    taskList = [];
+}
+
 let nextId = JSON.parse(localStorage.getItem("nextId"));
+if (!nextId) {
+    nextId = 1;
+}
 
 let taskTitleEl = $('#task-title');
 let taskDateEl = $('#task-due-date');
@@ -17,26 +24,26 @@ function generateTaskId() {
 }
 
 // Todo: create a function to create a task card
-function createTaskCard(title, date, task) {
+function createTaskCard(task) {
     const cardColumnEl = $('<div>');
     cardColumnEl.addClass('col-12 col-sm-4 col-md-3 mb-3');
 
     const cardEl = $('<div>');
     cardEl.addClass('card h-100');
-    cardEl.attr('task-id', task.id)
+    cardEl.attr('data-task-id', task.id);
     cardEl.appendTo(cardColumnEl);
 
-    const cardTitle = $('<h5>').addClass('card-title').text(title);
+    const cardTitle = $('<h5>').addClass('card-title').text(task.title);
     cardTitle.appendTo(cardEl);
 
     const cardBodyEl = $('<div>');
     cardBodyEl.addClass('card-body');
     cardBodyEl.appendTo(cardEl);
 
-    const cardDueDate = $('<p>').addClass('card-date').text(date);
+    const cardDueDate = $('<p>').addClass('card-date').text('Due: ' + task.dueDate);
     cardDueDate.appendTo(cardBodyEl);  
     
-    const cardTask = $('<p>').addClass('card-task').text(task);
+    const cardTask = $('<p>').addClass('card-task').text(task.description); // Ensure property access is correct
     cardTask.appendTo(cardBodyEl);
 
     const deleteBtnEl = $('<button>');
@@ -47,13 +54,14 @@ function createTaskCard(title, date, task) {
     return cardColumnEl;
 }
 
+
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
 
 }
 
 // Todo: create a function to handle adding a new task
-function handleAddTask(event){
+function handleAddTask(event) {
     event.preventDefault();
     const taskTitle = taskTitleEl.val();
     const taskDate = taskDateEl.val();
@@ -62,14 +70,14 @@ function handleAddTask(event){
     if (!taskTitle || !taskDate || !taskText) {
         console.log('You need to fill out the task details!');
         return;
-    } 
+    }
 
     const taskId = generateTaskId();
 
     const task = {
         id: taskId,
         title: taskTitle,
-        dueDate: taskDate, 
+        dueDate: taskDate,
         description: taskText
     };
 
@@ -79,11 +87,19 @@ function handleAddTask(event){
     
     taskList.push(task);
 
+    const taskListString = JSON.stringify(taskList);
+    localStorage.setItem('tasks', taskListString);
+
+    nextId = nextId + 1;
+    const nextIdString = JSON.stringify(nextId);
+    localStorage.setItem('nextId', nextIdString);
 
     taskTitleEl.val('');
     taskDateEl.val('');
     taskTextEl.val('');
 }
+
+
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
@@ -98,5 +114,5 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-
+    $('#task-form').on('submit', handleAddTask);
 });

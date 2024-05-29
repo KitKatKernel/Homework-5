@@ -33,24 +33,23 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="task-form">
               <div class="mb-3">
                 <label for="task-title" class="col-form-label">Task Title:</label>
                 <input type="text" class="form-control" placeholder="Enter a descriptive title" id="task-title">
               </div>
               <div class="mb-3">
-                <label for="task-due-date" class="col-form-label">Task Due Date</label>
-                <input type="text" class="form-control" placeholder="When is this due?" id="task-due-date"></input>
+                <label for="task-due-date" class="col-form-label">Task Due Date:</label>
+                <input type="text" class="form-control" placeholder="When is this due?" id="task-due-date">
               </div>
               <div class="mb-3">
-                <label for="task-text" class="col-form-label">Task Description</label>
+                <label for="task-text" class="col-form-label">Task Description:</label>
                 <textarea class="form-control" id="task-text" placeholder="Enter a detailed description"></textarea>
               </div>
-            </form>
+              <button type="submit" class="btn btn-primary">Submit Task</button>
+            </form>            
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Window</button>
-            <button type="button" class="btn btn-primary">Submit Task</button>
           </div>
         </div>
       </div>
