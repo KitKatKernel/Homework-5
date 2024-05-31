@@ -1,17 +1,12 @@
-// Retrieve tasks and nextId from localStorage
+// Retrieve tasks from localStorage, or creating it if it doesn't already exist.
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 if (!taskList) {
     taskList = [];
 }
 
-let nextId = JSON.parse(localStorage.getItem("nextId"));
-if (!nextId) {
-    nextId = 1;
-}
-
-let taskTitleEl = $('#task-title');
-let taskDateEl = $('#task-due-date');
-let taskTextEl = $('#task-text');
+const taskTitleEl = $('#task-title');
+const taskDateEl = $('#task-due-date');
+const taskTextEl = $('#task-text');
 
 function displayTime() {
     const rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
@@ -23,7 +18,7 @@ function generateTaskId() {
  return (Date.now())
 }
 
-// Todo: create a function to create a task card
+// Create's function to create a task card
 function createTaskCard(task) {
     const cardColumnEl = $('<div>');
     cardColumnEl.addClass('col-12 col-sm-4 col-md-3 mb-3');
@@ -43,13 +38,27 @@ function createTaskCard(task) {
     const cardDueDate = $('<p>').addClass('card-date').text('Due: ' + task.dueDate);
     cardDueDate.appendTo(cardBodyEl);  
     
-    const cardTask = $('<p>').addClass('card-task').text(task.description); // Ensure property access is correct
+    const cardTask = $('<p>').addClass('card-task').text(task.description); 
     cardTask.appendTo(cardBodyEl);
 
+    // Creates a delete button at the bottom of the task that's red.
     const deleteBtnEl = $('<button>');
     deleteBtnEl.addClass('btn btn-danger btn-sm').text('Remove Task');
     deleteBtnEl.on('click', handleDeleteTask);
     deleteBtnEl.appendTo(cardEl);
+
+    // Sets the card background color based on due date, white for 2+ days, yellow for due today, red for past due
+    if (task.dueDate && task.status !== 'complete') {
+       const now = dayjs();
+       const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+
+       if (now.isSame(taskDueDate, 'day')) {
+        cardEl.addClass('bg-warning text-black');
+       } else if (now.isAfter(taskDueDate)) {
+        cardEl.addClass('bg-danger text-white');
+        deleteBtnEl.addClass('border-light');
+       }
+    }
 
     return cardColumnEl;
 }
@@ -57,6 +66,12 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
+    if (taskList) {
+        taskList = JSON.parse(taskList)
+    }
+    // #todo-cards
+    // #in-progress-cards
+    // #done-cards
 
 }
 
@@ -78,7 +93,8 @@ function handleAddTask(event) {
         id: taskId,
         title: taskTitle,
         dueDate: taskDate,
-        description: taskText
+        description: taskText,
+        status: 'to-do',
     };
 
     const taskCard = createTaskCard(task);
@@ -90,10 +106,6 @@ function handleAddTask(event) {
     const taskListString = JSON.stringify(taskList);
     localStorage.setItem('tasks', taskListString);
 
-    nextId = nextId + 1;
-    const nextIdString = JSON.stringify(nextId);
-    localStorage.setItem('nextId', nextIdString);
-
     taskTitleEl.val('');
     taskDateEl.val('');
     taskTextEl.val('');
@@ -103,8 +115,19 @@ function handleAddTask(event) {
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+    event.preventDefault();
+    const taskCardEl = $(this).closest('.card');
+    const taskId = taskCardEl.attr('data-task-id');
+    for (let i = 0; i < taskList.length; i++) {
+        if (taskList[i].id == taskId) {
+            taskList.splice(i, 1);
+            break;
+        }
+    }
 
+    localStorage.setItem('tasks', JSON.stringify(taskList));
 
+    taskCardEl.remove();
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
