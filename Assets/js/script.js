@@ -66,13 +66,19 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-    if (taskList) {
-        taskList = JSON.parse(taskList)
+    if (taskList.length > 0) {
+        for (let i = 0; i < taskList.length; i++){
+        const taskCard = createTaskCard(taskList[i]);
+        
+    if (taskList[i].status === 'to-do') {
+        $('#todo-cards').append(taskCard);
+    } else if (taskList[i].status === 'in-progress') {
+        $('#in-progress-cards').append(taskCard);
+    } else if (taskList[i].status === 'done') {
+        $('#done-cards').append(taskCard);
     }
-    // #todo-cards
-    // #in-progress-cards
-    // #done-cards
-
+  }
+ }
 }
 
 // Todo: create a function to handle adding a new task
@@ -138,4 +144,5 @@ function handleDrop(event, ui) {
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
     $('#task-form').on('submit', handleAddTask);
+    renderTaskList();
 });
