@@ -30,6 +30,14 @@ No installation is required:
 4. Delete tasks by clicking the "Remove Task" button on each task card.
 5. Tasks are saved in localStorage and will be re-rendered between page reloads.
 
+### Screenshots
+
+#### Adding Task Form
+![Main Page](./sample1.png)
+
+#### Task Management Board
+![Task Management](./sample2.png)
+
 ## Credits
 
 A heartfelt thank you to my bootcamp instructors and peers for their continuous guidance and support. Special thanks to W3schools and MDN for their comprehensive resources on JavaScript. The tutorials and documentation from these sites were invaluable in helping me understand various concepts like local storage keys, using JSON.stringify, and implementing the functionality for this project.
