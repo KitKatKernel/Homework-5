@@ -15,7 +15,7 @@ function displayTime() {
 
 // Using Date.now() to generate a unique ID.
 function generateTaskId() {
- return (Date.now())
+    return Date.now();
 }
 
 // Create's function to create a task card
@@ -60,25 +60,42 @@ function createTaskCard(task) {
        }
     }
 
+    // Make the card draggable
+    cardEl.draggable({
+        revert: "invalid",
+        helper: function() {
+            return $(this).clone().css({
+                width: $(this).width(),
+                height: $(this).height(),
+                opacity: 0.5
+            });
+        },
+        start: function(event, ui) {
+            $(this).css("opacity", "0.5");
+        },
+        stop: function(event, ui) {
+            $(this).css("opacity", "1");
+        }
+    });
+
     return cardColumnEl;
 }
-
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
     if (taskList.length > 0) {
         for (let i = 0; i < taskList.length; i++){
-        const taskCard = createTaskCard(taskList[i]);
+            const taskCard = createTaskCard(taskList[i]);
         
-    if (taskList[i].status === 'to-do') {
-        $('#todo-cards').append(taskCard);
-    } else if (taskList[i].status === 'in-progress') {
-        $('#in-progress-cards').append(taskCard);
-    } else if (taskList[i].status === 'done') {
-        $('#done-cards').append(taskCard);
+            if (taskList[i].status === 'to-do') {
+                $('#todo-cards').append(taskCard);
+            } else if (taskList[i].status === 'in-progress') {
+                $('#in-progress-cards').append(taskCard);
+            } else if (taskList[i].status === 'done') {
+                $('#done-cards').append(taskCard);
+            }
+        }
     }
-  }
- }
 }
 
 // Todo: create a function to handle adding a new task
@@ -117,8 +134,6 @@ function handleAddTask(event) {
     taskTextEl.val('');
 }
 
-
-
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
     event.preventDefault();
@@ -138,11 +153,49 @@ function handleDeleteTask(event){
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
+    const taskCardEl = $(ui.helper);
+    const taskId = taskCardEl.attr('data-task-id');
+    const newStatus = $(this).attr('id').split('-')[0]; // Extracts 'to-do', 'in-progress', or 'done'
 
+    for (let i = 0; i < taskList.length; i++) {
+        if (taskList[i].id == taskId) {
+            taskList[i].status = newStatus;
+            break;
+        }
+    }
+
+    localStorage.setItem('tasks', JSON.stringify(taskList));
+
+    $('#todo-cards').empty();
+    $('#in-progress-cards').empty();
+    $('#done-cards').empty();
+    renderTaskList();
 }
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
     $('#task-form').on('submit', handleAddTask);
     renderTaskList();
+
+    // Make lanes droppable
+    $('#to-do').droppable({
+        accept: ".card",
+        drop: handleDrop
+    });
+
+    $('#in-progress').droppable({
+        accept: ".card",
+        drop: handleDrop
+    });
+
+    $('#done').droppable({
+        accept: ".card",
+        drop: handleDrop
+    });
+
+    // Initialize the date picker for the due date field
+    $('#task-due-date').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
 });
