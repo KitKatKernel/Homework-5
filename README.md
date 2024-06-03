@@ -14,13 +14,14 @@ Explore the contents of this guide:
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Screenshots](#screenshots)
 - [Credits](#credits)
 - [License](#license)
 
 ## Installation
 
 No installation is required:
-1. Open up the page on your favorite browser: [Task Board Project](https://kitkatkernel.github.io/Homework-5/)
+1. Open up the page on your favorite browser: [Task Board Project](https://kitkatkernel.github.io/Task-Board-Project/)
 
 ## Usage
 
@@ -30,12 +31,12 @@ No installation is required:
 4. Delete tasks by clicking the "Remove Task" button on each task card.
 5. Tasks are saved in localStorage and will be re-rendered between page reloads.
 
-### Screenshots
+## Screenshots
 
-#### Adding Task Form
+#### Main Page
 ![Main Page](./sample1.png)
 
-#### Task Management Board
+#### Task Management
 ![Task Management](./sample2.png)
 
 ## Credits
