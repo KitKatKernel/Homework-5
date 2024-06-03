@@ -1,100 +1,45 @@
-# 05 Third-Party APIs: Task Board
+# Task Board Project (Week 5)
 
-## Your Task
+## What is This Project?
 
-Create a simple task board application that allows a team to manage project tasks by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
+This week's project is a Task Board application designed to help a team manage project tasks.
 
-You'll need to use the [Day.js](https://day.js.org/en/) library to work with dates. Be sure to read the documentation carefully and concentrate on using Day.js in the browser.
+- **Why Did I Make This?**: To practice and enhance my skills in JavaScript, jQuery and a little bit of Bootstrap, by creating a dynamic and interactive task management application. This project also taught me more about using the Day.js library for date manipulation and jQuery UI for drag-and-drop functionality.
+- **What's in It?**: The application includes a main page where tasks can be added, viewed, and managed. Users can add new tasks, delete existing tasks, and drag tasks between different columns representing their progress (To-Do, In Progress, and Done). The task cards are color-coded based on their due dates, providing visual indicators for task urgency.
+- **What Did I Learn?**: This project helped me understand the integration of various JavaScript libraries and the importance of debugging for a better user experience in web applications. I learned about DOM manipulation, handling local storage, implementing and debugging drag-and-drop functionality, and maintaining consistent styling. 
 
-## User Story
+## Table of Contents
 
-```md
-AS A project team member with multiple tasks to organize
-I WANT a task board 
-SO THAT I can add individual project tasks, manage their state of progress and track overall project progress accordingly
-```
+Explore the contents of this guide:
 
-## Acceptance Criteria
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
 
-```md
-GIVEN a task board to manage a project
-WHEN I open the task board
-THEN the list of project tasks is displayed in columns representing the task progress state (Not Yet Started, In Progress, Completed)
-WHEN I view the task board for the project
-THEN each task is color coded to indicate whether it is nearing the deadline (yellow) or is overdue (red)
-WHEN I click on the button to define a new task
-THEN I can enter the title, description and deadline date for the new task into a modal dialog
-WHEN I click the save button for that task
-THEN the properties for that task are saved in localStorage
-WHEN I drag a task to a different progress column
-THEN the task's progress state is updated accordingly and will stay in the new column after refreshing
-WHEN I click the delete button for a task
-THEN the task is removed from the task board and will not be added back after refreshing
-WHEN I refresh the page
-THEN the saved tasks persist
-```
+## Installation
 
-The following animation demonstrates the application functionality:
+No installation is required:
+1. Open up the page on your favorite browser: [Task Board Project](https://kitkatkernel.github.io/Homework-5/)
 
-![A user adds three tasks to the task board and changes the state of two of them to in progress and then completion. The user then deletes the two cards in the done column.](./Assets/05-third-party-apis-homework-demo.gif)
+## Usage
 
-## Grading Requirements
+1. Use the form to add a task with a title, due date, and description.
+2. View tasks in their respective columns based on their status (To-Do, In Progress, Done).
+3. Drag tasks between columns to update their status.
+4. Delete tasks by clicking the "Remove Task" button on each task card.
+5. Tasks are saved in localStorage and will be re-rendered between page reloads.
 
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
+## Credits
 
-This Challenge is graded based on the following criteria:
+A heartfelt thank you to my bootcamp instructors and peers for their continuous guidance and support. Special thanks to W3schools and MDN for their comprehensive resources on JavaScript. The tutorials and documentation from these sites were invaluable in helping me understand various concepts like local storage keys, using JSON.stringify, and implementing the functionality for this project.
 
-### Technical Acceptance Criteria: 40%
+## License
 
-* Satisfies all of the above acceptance criteria plus the following:
+MIT License 
 
-  * Uses the Day.js library to work with dates
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-### Deployment: 32%
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-* Application deployed at live URL
-
-* Application loads with no errors
-
-* Application GitHub URL submitted
-
-* GitHub repo contains application code
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate
-
-* Application user interface style is clean and polished
-
-* Application resembles the mock-up functionality provided in the Challenge instructions
-
-### Repository Quality: 13%
-
-* Repository has a unique name
-
-* Repository follows best practices for file structure and naming conventions
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages
-
-* Repository contains quality README file with description, screenshot, and link to deployed application
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application
-
-* The URL of the GitHub repository, with a unique name and a README describing the project
-
-- - -
-© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
